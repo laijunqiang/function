@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>第一个 Highcharts 图表</title>
+</head>
+<body>
+<!-- 图表容器 DOM -->
+<!--如果容器没有设定宽高，默认是 宽 400px， 高 400px，另外设置容器的 min-width 属性可以让 highcharts 自适应宽度-->
+<div id="container" style="min-width:400px;height:400px"></div>
+<!-- 引入 highcharts.js -->
+<script src="__PUBLIC__/Highcharts/code/highcharts.js"></script>
+<!-- 需要保存导出功能模块文件是在 highcharts.js 之后引入 -->
+<script src="__PUBLIC__/Highcharts/code/modules/exporting.js"></script>
+
+<script>
+    // 图表配置
+    //通过构造函数绑定容器
+    var chart = Highcharts.chart('container', {
+        chart: {            //指定图表的类型，默认是折线图（line）
+            style: {        //图表样式
+                fontFamily: "",
+                fontSize: '12px',
+                fontWeight: 'bold',
+                color: '#006cee',
+                backgroundColor:'red'
+            },
+            type: 'column'
+        },
+        title: {            //标题（Title）
+            // useHTML:true,text: "<a href='https://www.hcharts.cn' target='_blank'>中文教程</a>"   在标题中添加链接
+            text: "Highcharts中文网"
+        },
+        subtitle: {         //副标题（subTitle）
+            text: '数据来源：thesolarfoundation.com'
+        },
+        //坐标轴（Axis）坐标轴包含x轴（xAxis）和y轴（yAxis）。通常情况下，x轴显示在图表的底部，y轴显示在图表的左侧。
+        xAxis:{
+            title:{
+                text:'时间'
+            }
+        },
+        yAxis: {
+            title: {
+                text: '就业人数'
+            }
+        },
+        legend: {           //图例。图例是图表中用不同形状、颜色、文字等 标示不同数据列，通过点击标示可以显示或隐藏该数据列。
+            layout: 'vertical',    //图例内容布局方式，有水平布局及垂直布局可选，对应的配置值是： “horizontal”， “vertical”
+            align: 'right',          //图例在图表中的对齐方式，有 “left”, "center", "right" 可选
+            verticalAlign: 'middle'  //垂直对齐方式
+        },
+        plotOptions: {      //标示区。可以在图表添加不同颜色的区域带，标示出明显的范围区域。
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                pointStart: 2010
+            }
+        },
+        tooltip: {          //数据提示框指的当鼠标悬停在某点上时，以框的形式提示该点的数据
+            backgroundColor: '#FCFFC5',   // 背景颜色
+            borderColor: 'black',         // 边框颜色
+            borderRadius: 10,             // 边框圆角
+            borderWidth: 3,               // 边框宽度
+            shadow: true,                 // 是否显示阴影
+            animation: true,               // 是否启用动画效果
+            style: {                      // 文字内容相关样式
+                color: "#ff0000",
+                fontSize: "12px",
+                fontWeight: "blod",
+                fontFamily: "Courir new"
+            }
+        },
+        //数据列配置是个数组，也就是数据配置可以包含多个数据列。数据列中的 name 代表数据列的名字，并且会显示在数据提示框（Tooltip）及图例（Legend）中。
+        series: [{
+            name: '安装，实施人员',
+            data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+        }, {
+            name: '工人',
+            data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+        }, {
+            name: '销售',
+            data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+        }, {
+            name: '项目开发',
+            data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+        }, {
+            name: '其他',
+            data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+        }],
+/*        版权信息是默认显示的，若不需要可以通过增加代码：
+        credits:{
+            enabled: false // 禁用版权信息
+        },*/
+        lang:{
+            contextButtonTitle: "图表导出菜单",
+            downloadJPEG:"下载 JPEG 图片",
+            downloadPDF:"下载 PDF 文件",
+            downloadPNG:"下载 PNG 文件",
+            downloadSVG:"下载 SVG 文件",
+            printChart:"打印图表"
+        },
+        responsive: {
+            rules: [{           // 在图表小于 500px 的情况下关闭图例
+                condition: {    // 响应条件
+                    maxWidth: 500
+                },
+                chartOptions: {     //响应内容
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+
+    console.log(chart.title.textStr);   //通过chart对象获取标题内容
+</script>
+</body>
+</html>
