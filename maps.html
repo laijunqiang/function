@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>maps</title>
+</head>
+<style type="text/css">
+    #container {width:300px; height: 180px; }
+</style>
+<body>
+    <div id="container"></div>
+<!--同步加载插件，可以在 JS API 的入口地址中添加plugin参数，将需要使用的一个或者多个插件的名称作为参数即可，
+    这种用法在 JS API 加载完毕之后便可直接使用插件功能了。
+    AMap.Autocomplete   输入提示，提供了根据关键字获得提示信息的功能-->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.8&key=f8390e014ea787ab2a708770ddb5bd28&plugin=AMap.Autocomplete"></script>
+    <script>
+        //var position = new AMap.LngLat(116, 39);//标准写法
+        //var position = [116,39]; //简写
+
+        var map = new AMap.Map('container',{
+            zoom: 10,  //设置地图显示的缩放级别
+            center: [116.397428, 39.90923],//设置地图中心点坐标
+            layers: [new AMap.TileLayer.Satellite()],  //设置图层,可设置成包含一个或多个图层的数组
+            mapStyle: 'amap://styles/whitesmoke',  //设置地图的显示样式
+            viewMode: '2D',  //设置地图模式
+            lang:'zh_cn'  //设置地图语言类型
+        });
+        //创建地图对象后，开始加载地图资源，地图加载完成后触发complete事件。
+        map.on('complete', function(){
+            // 地图图块加载完成后触发
+            console.log('已创建！')
+        });
+        // 调用destroy方法来销毁地图。该方法执行后，地图对象被注销，内存释放，地图容器被清空。
+        //map.destroy( );
+    </script>
+</body>
+</html>
