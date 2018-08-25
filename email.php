@@ -5,7 +5,7 @@
     //平台邮箱与授权登录码
     $username = config('mail_config.username');
     $password = config('mail_config.password');
-
+    //引入PHPMailer的三个文件
     Loader::import('PHPMailer.src.PHPMailer', EXTEND_PATH);
     Loader::import('PHPMailer.src.SMTP', EXTEND_PATH);
     Loader::import('PHPMailer.src.Exception', EXTEND_PATH);
